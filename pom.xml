@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.dianxin</groupId>
+    <artifactId>sso</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>sso-common</module>
+        <module>sso-oauth</module>
+        <module>sso-user</module>
+    </modules>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+
+        <java.version>8</java.version>
+
+        <spring-boot.version>2.6.11</spring-boot.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+
+
+
+        <swagger.version>2.9.2</swagger.version>
+        <lombok.version>1.18.20</lombok.version>
+        <mybatis.plus.version>3.5.0</mybatis.plus.version>
+        <druid.version>1.2.10</druid.version>
+        <log4j2.version>2.7.0</log4j2.version>
+        <mysql.version>8.0.25</mysql.version>
+        <shiro.version>1.9.0</shiro.version>
+        <mirai.version>2.11.1</mirai.version>
+        <hutool.version>5.8.0</hutool.version>
+        <junit.version>4.12</junit.version>
+        <jackson.version>2.13.0</jackson.version>
+        <fastjson.version>2.0.15</fastjson.version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <commons.io.version>2.11.0</commons.io.version>
+        <pagehelper.boot.version>1.4.5</pagehelper.boot.version>
+
+
+    </properties>
+
+
+
+
+    <!--spring boot 、 spring cloud 和 spring cloud alibaba 等依赖管理-->
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- SpringBoot 依赖配置 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringCloud 微服务 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- SpringCloud Alibaba 微服务 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- JSON 解析器和生成器 -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
+            <!-- Jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+
+            <!-- 公共模块 -->
+            <dependency>
+                <groupId>com.dianxin</groupId>
+                <artifactId>sso-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+
+
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>
