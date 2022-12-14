@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService {
     static {
         users = new ArrayList<>();
         users.add(new User(1L, "root", "123456"));
-        users.add(new User(2L, "张三", "123456"));
-        users.add(new User(3L, "李四", "123456"));
+        users.add(new User(2L, "user_a", "123456"));
+        users.add(new User(3L, "user_b", "123456"));
     }
 
 
