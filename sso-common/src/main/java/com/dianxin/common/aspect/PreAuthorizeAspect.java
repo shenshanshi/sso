@@ -90,7 +90,7 @@ public class PreAuthorizeAspect
     /**
      * 对一个Method对象进行注解检查
      */
-    public void checkMethodAnnotation(Method method) throws NotLoginException {
+    public void checkMethodAnnotation(Method method)  {
         // 校验 @RequiresLogin 注解
         RequiresLogin requiresLogin = method.getAnnotation(RequiresLogin.class);
         if (requiresLogin != null)

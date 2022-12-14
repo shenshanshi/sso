@@ -18,7 +18,7 @@ public class GlobalExceptionHandler
 {
 
     /**
-     * 权限码异常
+     * 登录验证异常
      */
     @ExceptionHandler(NotLoginException.class)
     public AjaxResult handleNotLoginException(NotLoginException e, HttpServletRequest request)
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler
     }
 
     /**
-     * 权限码异常
+     * 权限验证异常
      */
     @ExceptionHandler(NotPermissionException.class)
     public AjaxResult handleNotPermissionException(NotPermissionException e, HttpServletRequest request)
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler
     }
 
     /**
-     * 角色权限异常
+     * 角色验证异常
      */
     @ExceptionHandler(NotRoleException.class)
     public AjaxResult handleNotRoleException(NotRoleException e, HttpServletRequest request)
@@ -48,7 +48,7 @@ public class GlobalExceptionHandler
 
 
     /**
-     * 自定义验证异常
+     * 数据校验异常
      */
     @ExceptionHandler(BindException.class)
     public AjaxResult handleBindException(BindException e)
