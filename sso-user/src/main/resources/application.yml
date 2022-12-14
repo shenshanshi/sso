@@ -1,8 +1,9 @@
 server:
   port: 5002
 
+spring:
   redis:
-    host: localhost
+    host: niconiconi
     port: 6379
     database: 0
     timeout: 1800000

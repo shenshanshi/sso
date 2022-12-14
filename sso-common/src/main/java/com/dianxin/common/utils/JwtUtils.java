@@ -32,7 +32,7 @@ public class JwtUtils {
      */
     public static String createToken (Long userId){
 
-        String jetToken = Jwts.builder()
+        String jwtToken = Jwts.builder()
 
                 //设置头部信息
                 .setHeaderParam("typ", "JWT")
@@ -51,7 +51,7 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
 
-        return jetToken;
+        return jwtToken;
 
     }
 
@@ -97,8 +97,15 @@ public class JwtUtils {
      */
     public static String getToken()  {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        String jwtToken = request.getHeader("token");
+
+        String authorization  = request.getHeader("Authorization");
+
+        String jwtToken = authorization.replace("Bearer ", "");
+
+        System.out.println(jwtToken);
+
         return jwtToken;
+
     }
 
 

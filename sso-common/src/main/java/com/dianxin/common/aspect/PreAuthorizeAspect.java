@@ -97,7 +97,7 @@ public class PreAuthorizeAspect
         {
 
             checkLogin();
-            System.out.println("----------登录校验");
+//            System.out.println("----------登录校验");
         }
 
         // 校验 @RequiresRoles 注解
@@ -105,7 +105,7 @@ public class PreAuthorizeAspect
         if (requiresRoles != null)
         {
             checkRole(requiresRoles);
-            System.out.println("----------角色校验");
+//            System.out.println("----------角色校验");
 
         }
 
@@ -114,7 +114,7 @@ public class PreAuthorizeAspect
         if (requiresPermissions != null)
         {
             checkPermi(requiresPermissions);
-            System.out.println("----------权限校验");
+//            System.out.println("----------权限校验");
         }
     }
 
