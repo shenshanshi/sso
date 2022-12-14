@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -100,8 +101,11 @@ public class JwtUtils {
 
         String authorization  = request.getHeader("Authorization");
 
-        String jwtToken = authorization.replace("Bearer ", "");
+        if (StringUtils.isEmpty(authorization)){
+            return null;
+        }
 
+        String jwtToken = authorization.replace("Bearer ", "");
         System.out.println(jwtToken);
 
         return jwtToken;
