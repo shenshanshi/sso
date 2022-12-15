@@ -60,15 +60,37 @@ Session：在计算机中，尤其是在网络应用中，称为“会话控制�
 
 ### Token方式实现(推荐)
 
+
+
 json web token（JWT）是一个开放标准（rfc7519），它定义了一种紧凑的、自包含的方式，用于在各方之间以JSON对象安全地传输信息。它是以JSON形式作为Web应用中的令牌,用于在各方之间安全地将信息作为JSON对象传输。在数据传输过程中还可以完成数据加密、签名等相关处理。
+
+
+
+jwt网址：https://jwt.io
+
+
+
+实际的 JWT 大概就像下面这样。
+
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+eyJzdWIiOiJzc28iLCJ1c2VySWQiOjEsImV4cCI6MTY3MTAwNzA1MX0.
+NiOYhBnzOD5VJX1XKsYsfikm3RUglGmRKJ6PtHf2YLU
+```
+
+
 
 #### jwt的组成部分
 
- 标准的jwt令牌分为三部分，分别是Header、payload、signature；
 
-##### （1）Header
 
-它的组成部分包括两点
+ 标准的jwt令牌分为三部分，分别是Header(头部)、Payload(载荷)、Signature(签名)；
+
+
+
+##### （1）Header（头部）
+
+头不是一个json对象，它的组成部分包括两点
 
 ```json
 {
@@ -77,11 +99,27 @@ json web token（JWT）是一个开放标准（rfc7519），它定义了一种�
 }
 ```
 
+最后将 JSON 对象使用 **Base64URL 算法**转成字符串。
 
 
-##### （2）Payload
 
-其实就是自定义的数据，一般存储用户Id，用户名、过期时间等信息。也就是JWT的核心所在，因为这些数据就是使后端知道此token是哪个用户已经登录的凭证。而且这些数据是存在token里面的，由前端携带，所以后端几乎不需要保存任何数据。
+##### （2）Payload（载荷）
+
+Payload 部分也是一个 JSON 对象，用来存放实际需要传递的数据。JWT 规定了7个官方字段，供选用。
+
+```json
+{
+    "iss": "root",		//签发人
+    "exp": 1671007051,	//过期时间
+    "sub": "sso",		//主题
+    "aud": "student",	//受众
+    "nbf": 1671000051,	//生效时间
+    "iat": 1671000051,	//签发时间
+    "jti": 1001,		//编号
+}
+```
+
+除了官方字段，你还可以自定义一些数据，例如用户id，用户名，角色，权限等。
 
 ```json
 {
@@ -91,23 +129,28 @@ json web token（JWT）是一个开放标准（rfc7519），它定义了一种�
 }
 ```
 
+最后也是将 JSON 对象使用 **Base64URL 算法**转成字符串。
 
 
-##### （3）Signature
 
- 它是由3个部分组成，先是用 Base64 编码的 header 和 payload ，再用加密算法加密一下，加密的时候要放进去一个 secret ，这个相当于是一个秘钥，这个秘钥秘密地存储在服务端。
+**注：JWT 默认是不加密的，任何人都可以读到，所以不要把秘密信息放在这个部分。**
+
+
+
+##### （3）Signature（签名）
+
+ 它是由3个部分组成，先是用 Base64Url 编码的 header 和 payload ，再用加密算法加密一下，加密的时候要放进去一个 secret ，这个相当于是一个秘钥，这个秘钥秘密地存储在服务端。
+
+```json
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  secret)
+```
 
 **secret密钥是保存在服务器端的，jwt的签发生成也是在服务器端的，secret密钥就是用来进行jwt的签发和jwt的验证。所以，secret密钥就是你服务端的私钥，在任何场景都不应该泄露出去。一旦非法客户端得知这个secret密钥, 那就意味着非法客户端可以自我签发jwt了。**
 
-**token具体实现：**
 
-```json
-{
-    "msg": "登录成功",
-    "code": 200,	       
-    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzc28iLCJ1c2VySWQiOjEsImV4cCI6MTY3MTAwNzA1MX0.NiOYhBnzOD5VJX1XKsYsfikm3RUglGmRKJ6PtHf2YLU"
-}
-```
 
 
 
