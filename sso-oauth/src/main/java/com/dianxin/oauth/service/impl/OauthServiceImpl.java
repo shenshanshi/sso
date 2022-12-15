@@ -35,15 +35,28 @@ public class OauthServiceImpl implements OauthService {
         }
 
         String token = JwtUtils.createToken(user.getUserId());
+        String key = "aouth:token:" + user.getUserId();
 
-        redisTemplate.opsForValue().set(token, "default", JwtUtils.EXPIRE, TimeUnit.MILLISECONDS);
+
+//        Object result = redisTemplate.opsForValue().get(key);
+//        if (result != null){
+//            return AjaxResult.error("不可以重复登录");
+//        }
+
+
+        redisTemplate.opsForValue().set(key, token, JwtUtils.EXPIRE, TimeUnit.MILLISECONDS);
 
         return AjaxResult.success("登录成功").put("token", token);
     }
 
     @Override
     public AjaxResult logout() {
-        redisTemplate.delete(JwtUtils.getToken());
+
+        Long userId = JwtUtils.getUserId();
+
+        String key = "aouth:token:" + userId;
+
+        redisTemplate.delete(key);
         return AjaxResult.success("退出登录成功！");
     }
 }

@@ -127,10 +127,16 @@ public class PreAuthorizeAspect
         if (jwtToken == null){
             throw new NotLoginException("token为空");
         }
-        Object result = redisTemplate.opsForValue().get(jwtToken);
-        if (result == null){
+
+
+        Long userId = JwtUtils.getUserId();
+        String key = "aouth:token:" + userId;
+
+        Object result = redisTemplate.opsForValue().get(key);
+        if (result == null || !jwtToken.equals(result.toString())){
              throw new NotLoginException("token无效");
         }
+
 
     }
 
