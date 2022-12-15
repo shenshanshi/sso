@@ -93,7 +93,7 @@ public class JwtUtils {
 
 
     /**
-     * 根据Bearer认证标准从用户请求中获取token <a href=“https://datatracker.ietf.org/doc/html/rfc6750”></a>
+     * 根据Bearer认证标准从用户请求中获取token
      * @return
      */
     public static String getToken()  {
