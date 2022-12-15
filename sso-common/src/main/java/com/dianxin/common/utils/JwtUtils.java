@@ -106,7 +106,7 @@ public class JwtUtils {
         }
 
         String jwtToken = authorization.replace("Bearer ", "");
-        System.out.println(jwtToken);
+//        System.out.println(jwtToken);
 
         return jwtToken;
 
